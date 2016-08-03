@@ -11,13 +11,6 @@
     <artifactId>hokan_ng_springboot-custom</artifactId>
     <version>1.0.0-final</version>
 
-<!--    <parent>
-        <groupId>org.freakz</groupId>
-        <artifactId>hokan_ng_springboot-project</artifactId>
-        <version>0.0.1-SNAPSHOT</version>
-        <relativePath>../pom.xml</relativePath>
-    </parent>
--->
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <encoding>UTF-8</encoding>
