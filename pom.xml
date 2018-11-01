@@ -19,15 +19,16 @@
 		<junit.version>4.12</junit.version>
     </properties>
 
-    <repositories>
+    <!--    <repositories>
 
-        <repository>
-            <id>hokannew</id>
-            <name>hokannew-releases</name>
-            <url>http://artifactory.airiot.fi/artifactory/libs-release-local</url>
-        </repository>
+            <repository>
+                <id>hokannew</id>
+                <name>hokannew-releases</name>
+                <url>http://artifactory.airiot.fi/artifactory/libs-release-local</url>
+            </repository>
 
-    </repositories>
+        </repositories>
+    -->
 
     <dependencies>
         <dependency>
