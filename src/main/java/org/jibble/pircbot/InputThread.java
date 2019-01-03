@@ -13,8 +13,12 @@ found at http://www.jibble.org/licenses/
 
 package org.jibble.pircbot;
 
+import org.mozilla.universalchardet.UniversalDetector;
+
 import java.io.*;
 import java.net.Socket;
+import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.util.StringTokenizer;
 
 /**
@@ -72,13 +76,32 @@ public class InputThread extends Thread {
 					break;
 				}
 
-				byte[] foo = new byte[amount];
-				System.arraycopy(buffer, 0, foo, 0, amount);
-				String line = new String(foo);
+                byte[] messageBytes = new byte[amount];
+                System.arraycopy(buffer, 0, messageBytes, 0, amount);
+
+                UniversalDetector detector = new UniversalDetector(null);
+                detector.handleData(messageBytes, 0, messageBytes.length);
+                detector.dataEnd();
+
+                String encoding = detector.getDetectedCharset();
+                Charset charset;
+                if (encoding == null) {
+                    charset = StandardCharsets.UTF_8;
+                } else {
+                    if (encoding.equals("UTF-8")) {
+                        charset = StandardCharsets.UTF_8;
+                    } else {
+                        charset = StandardCharsets.ISO_8859_1;
+                    }
+                }
+                _bot.log("Line charset: " + charset.displayName());
+                detector.reset();
+
+                String line = new String(messageBytes, charset);
 				String[] split = line.split("\r\n");
 				for (String l : split) {
 					try {
-						_bot.handleLine(l, foo);
+                        _bot.handleLine(l, messageBytes);
 					} catch (Throwable t) {
 						// Stick the whole stack trace into a String so we can output it nicely.
 						StringWriter sw = new StringWriter();
