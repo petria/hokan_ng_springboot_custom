@@ -16,7 +16,7 @@
         <encoding>UTF-8</encoding>
         <maven.compiler.source>8</maven.compiler.source>
         <maven.compiler.target>8</maven.compiler.target>
-		<junit.version>4.12</junit.version>
+		<junit.version>4.13.1</junit.version>
     </properties>
 
 
